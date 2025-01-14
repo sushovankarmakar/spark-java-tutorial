@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class WordCount {
 
     private static final String INPUT_FILE_TEXT =
-            "/Users/b0266196/development/airtel-repos/spark-java-tutorial/src/main/resources/the_constitution_of_the_united_states.txt";
+            "/example_files/the_constitution_of_the_united_states.txt";
     private static final String OUTPUT_FILE_TEXT = "out";
     private static final Pattern SPACE = Pattern.compile(" ");
 
