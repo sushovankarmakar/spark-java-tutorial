@@ -33,5 +33,15 @@ public class _2_Function_Map {
         JavaRDD<Double> squareRoots = myRDD.map((value) -> Math.sqrt(value));
         squareRoots.foreach(val -> System.out.println("Sqrt val : " + val));
         squareRoots.foreach(System.out::println); // more modern syntax
+
+        // how many elements in RDD ? - two ways we can do
+        // 1. to count the number of items inside the RDD, we can use .count() operation, but it should be use if we're at the end of the process
+        System.out.println(squareRoots.count());
+
+        // 2. we can use map and reduce
+        Long totalNumOfElements = squareRoots.map(val -> 1L).reduce((val1, val2) -> val1 + val2); // use long type instead of integer, cause in big data, integer can be max 2 billion.
+        System.out.println("Total number of elements are : " + totalNumOfElements);
+
+        sc.close();
     }
 }
