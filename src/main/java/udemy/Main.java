@@ -35,6 +35,9 @@ public class Main {
         // parallelize : loading a java collection and turn it into a RDD
         JavaRDD<Double> myRDD = sc.parallelize(inputData);
 
+        Double sum = myRDD.reduce((value1, value2) -> value1 + value2);// reduce action contains shuffle operation also.
+
+        System.out.println("Sum is " + sum);
         sc.close();
     }
 }
