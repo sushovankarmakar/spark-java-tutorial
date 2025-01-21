@@ -31,8 +31,11 @@ public class _2_Function_Map {
         JavaRDD<Integer> myRDD = sc.parallelize(inputData);
 
         JavaRDD<Double> squareRoots = myRDD.map((value) -> Math.sqrt(value));
+        // JavaRDD<Double> squareRoots = myRDD.map(Math::sqrt); // more modern syntax, when we're passing one value and operating on one value only, then we can use this modern syntax
         squareRoots.foreach(val -> System.out.println("Sqrt val : " + val));
-        squareRoots.foreach(System.out::println); // more modern syntax
+
+        //squareRoots.foreach(System.out::println); // more modern syntax - this will give me 'not serializable exception' - because before sending println function to RDDs, spark tries to serialize it but println function in java is NOT serializable.
+        squareRoots.collect().forEach(System.out::println); // this is a fix of the above line.
 
         // how many elements in RDD ? - two ways we can do
         // 1. to count the number of items inside the RDD, we can use .count() operation, but it should be use if we're at the end of the process
