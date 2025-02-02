@@ -14,8 +14,8 @@
         <spark.version>3.5.1</spark.version>
         <hadoop.version>3.3.1</hadoop.version>
         <iceberg.version>1.7.1</iceberg.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -30,6 +30,13 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_${scala.base.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-catalyst_${scala.base.version}</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Hadoop Common: Contains the common utilities needed by Hadoop, including file system access -->
