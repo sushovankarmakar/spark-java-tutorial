@@ -1,4 +1,0 @@
-This is Spark.
-Where are you now ?
-Are you a Spark developer ?
-High time to develop Spark.
