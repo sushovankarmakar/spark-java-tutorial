@@ -145,10 +145,10 @@
             <artifactId>hadoop-aws</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-spark-runtime-3.3 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.iceberg</groupId>
             <artifactId>iceberg-spark-runtime-3.3_2.12</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
