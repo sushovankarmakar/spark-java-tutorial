@@ -35,9 +35,27 @@ public class _1_Function_Reduce {
         // parallelize : loading a java collection and turn it into a RDD
         JavaRDD<Double> myRDD = sc.parallelize(inputData);
 
-        Double sum = myRDD.reduce((value1, value2) -> value1 + value2);// reduce action contains shuffle operation also.
+        System.out.println(myRDD.toDebugString());
 
-        System.out.println("Sum is " + sum);
+        Double sum = myRDD.reduce((value1, value2) -> value1 + value2);// reduce action contains shuffle operation also.
+        System.out.println("(Using lamda) Sum is : " + sum);
+
+        Double sum1 = myRDD.reduce(Double::sum);
+        System.out.println("(Using method reference) Sum is : " + sum1);
+
+        // Minimum value in an Array
+        Double minValue = myRDD.reduce((val1, val2) -> Math.min(val1, val2));
+        System.out.println("Min value " + minValue);
+
+        // Maximum value in an array
+        Double maxValue = myRDD.reduce((val1, val2) -> Math.max(val1, val2));
+        System.out.println("Max value " + maxValue);
+
+        // average of all the values in an array
+        Double sum2 = myRDD.reduce(Double::sum);
+        Long nums = myRDD.map(val -> 1L).reduce(Long::sum);
+        System.out.println("Avg is : " + sum2/nums);
+
         sc.close();
     }
 }
