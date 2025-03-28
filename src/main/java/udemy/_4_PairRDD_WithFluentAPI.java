@@ -7,12 +7,16 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.SQLContext;
 import scala.Tuple2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class _4_PairRDD_WithFluentAPI {
+
+
+    // https://www.databricks.com/blog/2014/04/14/spark-with-java-8.html
 
     public static void main(String[] args) {
 

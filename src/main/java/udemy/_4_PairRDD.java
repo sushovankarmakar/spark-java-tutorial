@@ -50,6 +50,8 @@ public class _4_PairRDD {
         //levelPair.reduceByKey((val1, val2) -> val1 + val2); - old syntax
         JavaPairRDD<String, Long> levelAndCounts = levelPair.reduceByKey(Long::sum);// new syntax
 
+        System.out.println(levelAndCounts.toDebugString());
+
         levelAndCounts.foreach(tuple -> System.out.println(tuple._1 + " has " + tuple._2 + " records"));
 
         sc.close();
