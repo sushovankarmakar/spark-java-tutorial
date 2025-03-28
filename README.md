@@ -2,7 +2,20 @@
 ### 28.03.2025
 
 #### FlatMaps :
-* 
+* Map function works in `(1 input --> 1 output)` format.
+* But sometimes we need function to work with `(1 input --> 0 or more outputs)` format. Here comes flatmap
+```java
+JavaRDD<String> words = inputRdd.flatMap(val ->
+      Arrays.asList(val.split(" ")).iterator() // flatMap returns an Iterator objects
+);
+```
+
+### Filter :
+* filtering out
+```java
+// filtering out numeric words
+JavaRDD<String> filteredWords = words.filter(word -> !word.matches("\\d+"));
+```
 
 --------------------------------------------------------------------
 ### 27.03.2025

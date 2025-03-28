@@ -34,7 +34,10 @@ public class _5_FlatMaps {
                     Arrays.asList(val.split(" ")).iterator()
             );
 
-            words.foreach(word ->  System.out.println(word + " "));
+            // filtering out numeric words
+            JavaRDD<String> filteredWords = words.filter(word -> !word.matches("\\d+"));
+
+            filteredWords.foreach(word ->  System.out.println(word + " "));
         }
     }
 }
