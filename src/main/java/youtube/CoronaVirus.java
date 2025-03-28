@@ -1,6 +1,5 @@
 package youtube;
 
-import com.sun.tools.javac.util.List;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -17,6 +16,7 @@ public class CoronaVirus {
 
     // https://www.youtube.com/watch?v=_kFNxF2MM_M&list=PL3N9eeOlCrP5PfpYrP6YxMNtt5Hw27ZlO&index=8&ab_channel=AIEngineering
     // I followed the above YouTube video to implement below code.
+    // sample data taken from : https://github.com/srivatsan88/YouTubeLI/tree/master/dataset/coronavirus
 
     // I've learnt the below topics
     // 1. how to load the data.
@@ -47,7 +47,7 @@ public class CoronaVirus {
 
         SparkSession spark = SparkSession.builder().config(sparkConf).getOrCreate();
 
-        String coronaInputPath = "src/main/resources/corona_dataset.csv";
+        String coronaInputPath = "src/main/resources/youtube/corona_dataset.csv";
         Dataset<Row> coronaDataset = spark.read()
                 .option("inferSchema", true)
                 .option("header", true)
@@ -55,7 +55,7 @@ public class CoronaVirus {
 
         //coronaDataset.show(10, false);
 
-        String twitterInputPath = "src/main/resources/tweets.csv";
+        String twitterInputPath = "src/main/resources/youtube/tweets.csv";
         Dataset<Row> twitterDataset = spark.read()
                 .option("inferSchema", true)
                 .option("header", true)
@@ -113,7 +113,7 @@ public class CoronaVirus {
         // wide transformation : reduceByKey - shuffle across partitions
         // map vs flatmap : map = 1:1, flatmap = 1:n
 
-        JavaRDD<Integer> listRDD = jsc.parallelize(List.of(1, 4, 8));
+        JavaRDD<Integer> listRDD = jsc.parallelize(Arrays.asList(1, 4, 8));
 
         JavaRDD<Integer> mapRDD = listRDD.map(val -> val * val);
 
