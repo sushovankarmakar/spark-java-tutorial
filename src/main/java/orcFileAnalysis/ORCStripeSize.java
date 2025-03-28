@@ -1,9 +1,8 @@
+package orcFileAnalysis;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.orc.*;
-import org.apache.orc.impl.OrcIndex;
-import org.apache.orc.impl.OrcTail;
-import org.apache.orc.impl.SchemaEvolution;
 
 import java.io.IOException;
 import java.util.List;

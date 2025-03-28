@@ -1,3 +1,5 @@
+package orcFileAnalysis;
+
 import org.apache.orc.*;
 //import org.apache.orc.impl.ReaderImpl;
 import org.apache.hadoop.conf.Configuration;

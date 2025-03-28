@@ -1,3 +1,5 @@
+package orcFileAnalysis;
+
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.types.DataTypes;
 import org.slf4j.Logger;
@@ -18,7 +20,7 @@ public class OrcToCsvWithDecryption {
     public static void main(String[] args) {
         // Initialize SparkSession
         SparkSession spark = SparkSession.builder()
-                .appName("OrcToCsvWithDecryption")
+                .appName("orcFileAnalysis.OrcToCsvWithDecryption")
                 .config("spark.master", "local")
                 .getOrCreate();
 
