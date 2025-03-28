@@ -13,7 +13,7 @@
         <scala.version>${scala.base.version}.15</scala.version>
         <spark.version>3.5.1</spark.version>
         <hadoop.version>3.3.1</hadoop.version>
-        <iceberg.version>1.7.1</iceberg.version>
+        <iceberg.version>1.8.1</iceberg.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
@@ -30,13 +30,11 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_${scala.base.version}</artifactId>
             <version>${spark.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-catalyst_${scala.base.version}</artifactId>
             <version>${spark.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Hadoop Common: Contains the common utilities needed by Hadoop, including file system access -->
@@ -115,8 +113,25 @@
         <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-spark-runtime-3.3 -->
         <dependency>
             <groupId>org.apache.iceberg</groupId>
-            <artifactId>iceberg-spark-runtime-3.3_2.12</artifactId>
+            <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>
             <version>${iceberg.version}</version>
+        </dependency>
+
+        <!-- Add inside the <dependencies> section -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
 
