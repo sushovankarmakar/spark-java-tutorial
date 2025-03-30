@@ -1,4 +1,14 @@
 
+### 30.03.2025
+
+#### Reading input files from disk
+* In big data, we usually read from a distributed file system like s3 or hadoop
+* when we call textFile, it doesn't store the entire file into the memory
+* Instead, textFile() asked driver to inform its workers to load parts (partitions) of this input file
+```java
+JavaRDD<String> inputRDD = jsc.textFile("...input.txt");
+```
+
 ### 28.03.2025
 
 #### FlatMaps :
