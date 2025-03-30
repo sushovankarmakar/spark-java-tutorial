@@ -20,7 +20,7 @@ public class _6_ReadingFromDisk {
             // when we call textFile, it doesn't store the entire file into the memory
 
             // textFile() asked driver to inform its workers to load parts (partitions) of this input file
-            JavaRDD<String> inputRDD = jsc.textFile("src/main/resources/udemy/virtualPairProgrammers/subtitles/input.txt");
+            JavaRDD<String> inputRDD = jsc.textFile("src/main/resources/udemy/virtualPairProgrammers/subtitles/input-docker-course.txt");
 
             JavaRDD<String> words = inputRDD.flatMap(line -> Arrays.asList(line.split(" ")).iterator());
 

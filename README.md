@@ -1,12 +1,59 @@
+[RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
 ### 30.03.2025
+
+#### Practical : Keywords ranking
+1. Load the file into RDD 
+    ```java
+    jsc.textFile(inputFile)
+    ```
+2. Filtering all noisy lines i.e. timestamps, empty lines and turning all of them in lowercase
+    ```java
+    .map(line -> line.replaceAll("[^a-zA-Z\\s]", "").trim().toLowerCase())
+    ```
+3. Converting lines into words
+   ```java
+    .flatMap(line -> Arrays.asList(line.split(" ")).iterator())
+    ```
+4. Filtering out the empty AND boring words
+   ```java
+    .filter(word -> !word.isEmpty() && Util.isNotBoring(word))
+    ```
+5. Count up the remaining words
+   ```java
+    .mapToPair(word -> new Tuple2<>(word, 1L))
+    .reduceByKey((v1, v2) -> v1 + v2)
+    ```
+6. Find the top 10 most frequently used words
+    ```java
+    .mapToPair(pair -> new Tuple2<>(pair._2, pair._1)) // switching value and key so that we can sort by value
+    .sortByKey(false)
+    .take(10)
+    ```
+7. Final output
+    ```java
+    JavaPairRDD<Long, String> wordFrequencies = jsc.textFile(inputFileSpringCourseSubtitles)
+        .map(line -> line.replaceAll("[^a-zA-Z\\s]", "").trim().toLowerCase())
+        .flatMap(line -> Arrays.asList(line.split(" ")).iterator())
+        .filter(word -> !word.isEmpty() && Util.isNotBoring(word))
+        .mapToPair(word -> new Tuple2<>(word, 1L)) // take PairFunction
+        .reduceByKey((v1, v2) -> v1 + v2) // takes Function2
+        .mapToPair(pair -> new Tuple2<>(pair._2, pair._1))  // switching value and key so that we can sort by value
+        .sortByKey(false); // sorting in descending order
+
+    wordFrequencies
+        .take(10)
+        .forEach(System.out::println);
+    ```
+
+### 29.03.2025
 
 #### Reading input files from disk
 * In big data, we usually read from a distributed file system like s3 or hadoop
 * when we call textFile, it doesn't store the entire file into the memory
 * Instead, textFile() asked driver to inform its workers to load parts (partitions) of this input file
 ```java
-JavaRDD<String> inputRDD = jsc.textFile("...input.txt");
+JavaRDD<String> inputRDD = jsc.textFile("...input-docker-course.txt");
 ```
 
 ### 28.03.2025
