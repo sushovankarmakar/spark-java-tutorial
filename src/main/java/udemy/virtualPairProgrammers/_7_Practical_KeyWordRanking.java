@@ -37,10 +37,25 @@ public class _7_Practical_KeyWordRanking {
                     .mapToPair(pair -> new Tuple2<>(pair._2, pair._1))  // switching value and key so that we can sort by value
                     .sortByKey(false); // sorting in descending order
 
+            // to get the output in sorted order, we need to call take() function, not foreach function.
             wordFrequencies.take(10)
                     .forEach(System.out::println);
-        }
 
-        // why do sorts not work with foreach in Spark ?
+            System.out.println("There are " + wordFrequencies.getNumPartitions() + " partitions. ");
+
+            // Q : why do sorts not work with foreach in Spark ?
+            // because: driver is sending foreach function to each partition and this function will be executed in parallel in each partition
+
+            // Now, although we're running in a single machine but this single machine has multiple cores
+            // and the default configuration of spark is that
+            // for each core, java will spin up a new thread
+
+            // so here, output we're seeing is as simple as we would run a multithreaded java programme
+            // each thread is running on each partition and printing some of the lines
+            // before another thread is interrupting the current thread and then starts its processing.
+
+            // Below code will give us wrong result, uncomment this to understand why sorting not work with foreach
+            // wordFrequencies.coalesce(1).foreach(element -> System.out.println(element));
+        }
     }
 }
