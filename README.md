@@ -1,5 +1,87 @@
 [RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
+### 31.03.2025
+
+### Joins
+
+#### 1.  Inner join
+```java
+JavaPairRDD<Integer, Tuple2<Integer, String>> innerJoin = userVisits.join(users);
+```
+```
+Inner join
+(6, (4,  Raquel)) 
+(4, (18, Doris)) 
+```
+----
+
+#### 2. Left outer join
+```java
+JavaPairRDD<Integer, Tuple2<Integer, Optional<String>>> leftOuterJoin = userVisits.leftOuterJoin(users);
+```
+```
+(10, (9,    Optional.empty)) 
+(6,  (4,    Optional[Raquel])) 
+(4,  (18,   Optional[Doris])) 
+```
+----
+#### 3. Right outer join
+```java
+JavaPairRDD<Integer, Tuple2<Optional<Integer>, String>> rightOuterJoin = userVisits.rightOuterJoin(users);
+```
+```
+(5, (Optional.empty,    Marybelle)) 
+(3, (Optional.empty,    Alan)) 
+(1, (Optional.empty,    John)) 
+(2, (Optional.empty,    Bob)) 
+(6, (Optional[4],       Raquel)) 
+(4, (Optional[18],      Doris))
+```
+----
+
+#### 4. Full outer join
+```java
+JavaPairRDD<Integer, Tuple2<Optional<Integer>, Optional<String>>> fullOuterJoin = userVisits.fullOuterJoin(users);
+```
+```
+(5,     (Optional.empty,    Optional[Marybelle])) 
+(3,     (Optional.empty,    Optional[Alan])) 
+(10,    (Optional[9],       Optional.empty)) 
+(4,     (Optional[18],      Optional[Doris])) 
+(2,     (Optional.empty,    Optional[Bob])) 
+(1,     (Optional.empty,    Optional[John])) 
+(6,     (Optional[4],       Optional[Raquel])) 
+```
+
+----
+
+#### 5. Cross Join or Cartesian
+```java
+JavaPairRDD<Tuple2<Integer, Integer>, Tuple2<Integer, String>> cartesian = userVisits.cartesian(users);
+```
+* All the values will be paired up with every single possible combination
+```
+((4,  18),   (1, John)) 
+((4,  18),   (3, Alan)) 
+((4,  18),   (2, Bob)) 
+((4,  18),   (4, Doris)) 
+((4,  18),   (5, Marybelle)) 
+((4,  18),   (6, Raquel)) 
+((6,  4),    (2, Bob)) 
+((6,  4),    (1, John)) 
+((6,  4),    (4, Doris)) 
+((6,  4),    (6, Raquel)) 
+((6,  4),    (3, Alan)) 
+((6,  4),    (5, Marybelle)) 
+((10, 9),    (1, John)) 
+((10, 9),    (2, Bob)) 
+((10, 9),    (3, Alan)) 
+((10, 9),    (4, Doris)) 
+((10, 9),    (6, Raquel)) 
+((10, 9),    (5, Marybelle))
+```
+----
+
 ### 30.03.2025
 
 #### Practical : Keywords ranking
