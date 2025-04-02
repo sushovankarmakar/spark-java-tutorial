@@ -19,7 +19,8 @@ public class _8_BigDataExercise {
 
         try (JavaSparkContext jsc = new JavaSparkContext(sparkConf)) {
 
-            // running it on test mode only so that it is workable BOTH on windows and mac
+            // running it on test mode only (isTestMode = true)
+            // so that it is workable BOTH on windows and mac
             // while making test mode false, it starts reading from file hadoop and in windows, it starts throwing error.
 
             // tried but didn't work
@@ -27,7 +28,12 @@ public class _8_BigDataExercise {
             // Create a directory (e.g., C:\hadoop\bin) and add the winutils.exe file there
             // System.setProperty("hadoop.home.dir", "C:\\hadoop");
 
-            boolean isTestMode = false;
+            // one more hack is that,
+            // if we convert all the input csv files to txt files
+            // then we can run it in (isTestMode = false) i.e. we can read from file system only.
+            // explanation to this has been added into _8_BigDataExercise.md
+
+            boolean isTestMode = true;
 
             JavaPairRDD<Integer, Integer> chapterDataRdd = setUpChapterDataRdd(jsc, isTestMode);
             JavaPairRDD<Integer, Integer> viewDataRdd = setUpViewDataRdd(jsc, isTestMode);

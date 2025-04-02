@@ -1,5 +1,9 @@
 [RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
+### 02.04.2025
+
+* Reading txt file vs csv file using `javaSparkContext.textFile("filePath")` : [Explanation](src/main/java/udemy/virtualPairProgrammers/_8_BigDataExercise.md)
+
 ### 31.03.2025
 
 ### Joins
