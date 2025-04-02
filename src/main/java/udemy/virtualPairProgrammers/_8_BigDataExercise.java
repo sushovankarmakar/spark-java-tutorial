@@ -3,6 +3,7 @@ package udemy.virtualPairProgrammers;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.SparkSession;
 import scala.Tuple2;
 
 import java.util.ArrayList;
@@ -17,6 +18,14 @@ public class _8_BigDataExercise {
                 .setMaster("local[*]");
 
         try (JavaSparkContext jsc = new JavaSparkContext(sparkConf)) {
+
+            // running it on test mode only so that it is workable BOTH on windows and mac
+            // while making test mode false, it starts reading from file hadoop and in windows, it starts throwing error.
+
+            // tried but didn't work
+            // tried adding Hadoop's winutils binary to my system.
+            // Create a directory (e.g., C:\hadoop\bin) and add the winutils.exe file there
+            // System.setProperty("hadoop.home.dir", "C:\\hadoop");
 
             boolean isTestMode = false;
 
