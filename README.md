@@ -1,10 +1,37 @@
 [RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
-### 02.04.2025
+----------------------------------------
+## 08.04.2025
+
+### Wide and Narrow transformation.
+
+#### Narrow transformation
+1. filter, mapToPair - these are narrow transformation.
+
+#### Wide transformation 
+1. Wide transformation produces shuffling so try to delay wide transformation as late as possible in the DAG.
+2. groupByKey, join - these are wide transformation
+
+### avoid groupByKey and use 'map-side-reduce' instead
+* reduceByKey is better than groupByKey although both of them will cause shuffling
+* but still reduceByKey is better cause
+* reduceByKey has two stages
+  * at first stage : it will apply the reduce function on each partition which does NOT reduce any shuffling.
+  * at second stage : it will shuffle to bring similar keys into one partition but this shuffling is very minimal.
+* reduceByKey is sometimes called as 'map-side-reduce'.
+----------------------------------------
+1. [How To Use Spark Transformations Efficiently For MapReduce-Like Jobs](https://www.finra.org/about/technology/blog/how-to-use-spark-transformations-efficiently-for-mapreduce-like-jobs)
+2. [Spark Reduction Transformations Explained](https://scaibu.medium.com/spark-reduction-transformations-explained-b7642c668d01)
+3. [Difference between reduceByKey and groupByKey](https://www.linkedin.com/pulse/apache-spark-difference-between-reducebykey-abhijit-sarkhel/)
+
+---
+## 02.04.2025
 
 * Reading txt file vs csv file using `javaSparkContext.textFile("filePath")` : [Explanation](src/main/java/udemy/virtualPairProgrammers/_8_BigDataExercise.md)
 
-### 31.03.2025
+----------------------------------------
+
+## 31.03.2025
 
 ### Joins
 
