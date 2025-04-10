@@ -5,6 +5,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.storage.StorageLevel;
 import scala.Tuple2;
 
 import java.util.Scanner;
@@ -37,7 +38,9 @@ public class _9_PartitionTesting {
             JavaPairRDD<String, Iterable<String>> results = pairRDD.groupByKey();
             System.out.println("After a wide transformation, we've : " + results.getNumPartitions() + " number of partitions.");
 
-            results = results.cache(); // cache() would only work if there is enough memory to hold the data. so use it if our data size is very small.
+            //results = results.cache(); // cache() would only work if there is enough memory to hold the data. so use it if our data size is very small.
+
+            results = results.persist(StorageLevel.MEMORY_AND_DISK());
 
             results.foreach(it -> System.out.println("key " + it._1 + " has " + Iterables.size(it._2) + " elements."));
 
