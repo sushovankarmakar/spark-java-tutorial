@@ -184,25 +184,4 @@ class DataBaseConnection {
         return dataSource;
     }
 }
-
-enum QueryEngineProperties {
-
-    CGNAT_QUERYENGINE_DBURL("cgnat.queryengine.dbURL", "jdbc:oracle:thin:@scan-PCGNATDB.india.airtel.itm:1535/PCGNATDB"),
-    CGNAT_QUERYENGINE_DBUSERNAME("cgnat.queryengine.dbUsername", "CGNAT_OCP"),
-    CGNAT_QUERYENGINE_DBPASSWORD("cgnat.queryengine.dbPassword", "CgOcp#123"),
-    CGNAT_QUERYENGINE_DRIVER("cgnat.queryengine.driver","oracle.jdbc.driver.OracleDriver"),
-    CGNAT_QUERYENGINE_RDBMS("cgnat.queryengine.rdbms", "oracle");
-
-    private String key;
-    private String value;
-
-    private QueryEngineProperties(String key, String defaultValue) {
-        this.key = key;
-        this.value = defaultValue;
-    }
-
-    public String getValue() {
-        return value;
-    }
-}
 */
