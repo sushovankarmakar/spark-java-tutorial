@@ -37,7 +37,11 @@ public class _9_PartitionTesting {
             JavaPairRDD<String, Iterable<String>> results = pairRDD.groupByKey();
             System.out.println("After a wide transformation, we've : " + results.getNumPartitions() + " number of partitions.");
 
+            results = results.cache(); // cache() would only work if there is enough memory to hold the data. so use it if our data size is very small.
+
             results.foreach(it -> System.out.println("key " + it._1 + " has " + Iterables.size(it._2) + " elements."));
+
+            System.out.println("Total count is : " + results.count());
 
             // Spark runs a UI server on port 4040 and this server is ONLY accessible through the lifespan of our code.
             // This below scanner code is used to stop completing our code so that we can look into Spark UI peacefully.
