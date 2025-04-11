@@ -1,5 +1,63 @@
 [RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
+## 11.04.2025
+
+## SparkSQL in Java
+
+### Reading CSV files using SparkSQL
+The `SparkSession` API provides an easy way to read CSV files and work with them as `Dataset<Row>` objects.
+
+#### **Key Points**:
+1. SparkSession: The entry point for working with structured data in Spark.
+2. Dataset<row></row>: Represents tabular data similar to a table in a database.
+3. Options:
+   * header: Set to true to use the first row as column names.
+   * inferSchema: Automatically infers the data types of columns (optional).
+
+#### **Benefits of SparkSQL**:
+1. Simplifies working with structured data.
+2. Provides SQL-like operations for querying data.
+3. Integrates seamlessly with Spark's RDD and DataFrame APIs.
+
+#### **Additional Notes:**
+* Use `.config("spark.sql.warehouse.dir", "file:///c:/tmp/")` to specify a warehouse directory for SparkSQL if needed.
+* SparkSQL is ideal for working with large datasets and performing complex queries.
+
+#### Example:
+```java
+import org.apache.spark.SparkConf;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+
+public class SparkSQLExample {
+
+    public static void main(String[] args) {
+
+        String inputFilePath = "src/main/resources/udemy/virtualPairProgrammers/exams/students.csv";
+
+        SparkConf sparkConf = new SparkConf()
+                .setAppName("spark-sql")
+                .setMaster("local[*]");
+
+        SparkSession sparkSession = SparkSession.builder()
+                .config(sparkConf)
+                .getOrCreate();
+
+        // Reading CSV file into a Dataset
+        Dataset<Row> inputData = sparkSession.read()
+                .option("header", "true") // Use the first row as a header
+                .csv(inputFilePath);
+
+        // Displaying the data
+        inputData.show();
+
+        // Counting the total number of rows
+        System.out.println("Total count: " + inputData.count());
+    }
+}
+```
+
 ----------------------------------------
 ## 08.04.2025
 
